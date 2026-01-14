@@ -903,6 +903,19 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'priority'    => 120,
     ) ) );
 
+    // Top Bar Link Hover Color
+    $wp_customize->add_setting( 'ashutosh_topbar_link_hover_color', array(
+        'default'           => '#F58220',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_topbar_link_hover_color', array(
+        'label'       => __( 'Top Bar Link Hover Color', 'ashutosh-securities' ),
+        'description' => __( 'Color when hovering over top bar links', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 125,
+    ) ) );
+
     // ========================================
     // HEADER/NAVIGATION COLORS
     // ========================================
@@ -946,6 +959,19 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'priority'    => 150,
     ) ) );
 
+    // Navigation Link Hover Color
+    $wp_customize->add_setting( 'ashutosh_nav_link_hover_color', array(
+        'default'           => '#F58220',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_nav_link_hover_color', array(
+        'label'       => __( 'Navigation Link Hover Color', 'ashutosh-securities' ),
+        'description' => __( 'Color when hovering over navigation links', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 155,
+    ) ) );
+
     // Header Border Color
     $wp_customize->add_setting( 'ashutosh_header_border_color', array(
         'default'           => '#e0e0e0',
@@ -957,6 +983,19 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'description' => __( 'Border color for header bottom', 'ashutosh-securities' ),
         'section'     => 'ashutosh_theme_colors',
         'priority'    => 160,
+    ) ) );
+
+    // Sub-menu Hover Background Color
+    $wp_customize->add_setting( 'ashutosh_submenu_hover_bg_color', array(
+        'default'           => '#f8f9fa',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_submenu_hover_bg_color', array(
+        'label'       => __( 'Sub-menu Hover Background', 'ashutosh-securities' ),
+        'description' => __( 'Background color when hovering over sub-menu items', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 165,
     ) ) );
 
     // ========================================
@@ -1013,6 +1052,19 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'description' => __( 'Link color in footer', 'ashutosh-securities' ),
         'section'     => 'ashutosh_theme_colors',
         'priority'    => 200,
+    ) ) );
+
+    // Footer Link Hover Color
+    $wp_customize->add_setting( 'ashutosh_footer_link_hover_color', array(
+        'default'           => '#F58220',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_footer_link_hover_color', array(
+        'label'       => __( 'Footer Link Hover Color', 'ashutosh-securities' ),
+        'description' => __( 'Color when hovering over footer links', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 205,
     ) ) );
 
     // Footer Icon Color
@@ -1306,22 +1358,29 @@ function ashutosh_securities_theme_colors_css() {
     $button_text_color     = get_theme_mod( 'ashutosh_button_text_color', '#ffffff' );
     
     // Top Bar Colors
-    $topbar_bg_color       = get_theme_mod( 'ashutosh_topbar_bg_color', '#1a1d29' );
-    $topbar_text_color     = get_theme_mod( 'ashutosh_topbar_text_color', '#ffffff' );
-    $topbar_link_color     = get_theme_mod( 'ashutosh_topbar_link_color', '#aaaaaa' );
+    $topbar_bg_color             = get_theme_mod( 'ashutosh_topbar_bg_color', '#1a1d29' );
+    $topbar_text_color           = get_theme_mod( 'ashutosh_topbar_text_color', '#ffffff' );
+    $topbar_link_color           = get_theme_mod( 'ashutosh_topbar_link_color', '#aaaaaa' );
+    $topbar_link_hover_color     = get_theme_mod( 'ashutosh_topbar_link_hover_color', '#F58220' );
     
     // Header/Navigation Colors
-    $header_bg_color       = get_theme_mod( 'ashutosh_header_bg_color', '#ffffff' );
-    $header_text_color     = get_theme_mod( 'ashutosh_header_text_color', '#1a1d29' );
-    $nav_link_color        = get_theme_mod( 'ashutosh_nav_link_color', '#1a1d29' );
-    $header_border_color   = get_theme_mod( 'ashutosh_header_border_color', '#e0e0e0' );
+    $header_bg_color             = get_theme_mod( 'ashutosh_header_bg_color', '#ffffff' );
+    $header_text_color           = get_theme_mod( 'ashutosh_header_text_color', '#1a1d29' );
+    $nav_link_color              = get_theme_mod( 'ashutosh_nav_link_color', '#1a1d29' );
+    $nav_link_hover_color        = get_theme_mod( 'ashutosh_nav_link_hover_color', '#F58220' );
+    $header_border_color         = get_theme_mod( 'ashutosh_header_border_color', '#e0e0e0' );
+    $submenu_hover_bg_color      = get_theme_mod( 'ashutosh_submenu_hover_bg_color', '#f8f9fa' );
     
     // Footer Colors
-    $footer_bg_color       = get_theme_mod( 'ashutosh_footer_bg_color', '#1a1d29' );
-    $footer_heading_color  = get_theme_mod( 'ashutosh_footer_heading_color', '#ffffff' );
-    $footer_text_color     = get_theme_mod( 'ashutosh_footer_text_color', '#aaaaaa' );
-    $footer_link_color     = get_theme_mod( 'ashutosh_footer_link_color', '#ffffff' );
-    $footer_icon_color     = get_theme_mod( 'ashutosh_footer_icon_color', '#d4a747' );
+    $footer_bg_color             = get_theme_mod( 'ashutosh_footer_bg_color', '#1a1d29' );
+    $footer_heading_color        = get_theme_mod( 'ashutosh_footer_heading_color', '#ffffff' );
+    $footer_text_color           = get_theme_mod( 'ashutosh_footer_text_color', '#aaaaaa' );
+    $footer_link_color           = get_theme_mod( 'ashutosh_footer_link_color', '#ffffff' );
+    $footer_link_hover_color     = get_theme_mod( 'ashutosh_footer_link_hover_color', '#F58220' );
+    $footer_icon_color           = get_theme_mod( 'ashutosh_footer_icon_color', '#d4a747' );
+    
+    // Footer Bottom Colors
+    $footer_bottom_link_hover_color = get_theme_mod( 'footer_bottom_link_hover_color', '#F58220' );
 
     // Output custom CSS
     ?>
@@ -1353,7 +1412,7 @@ function ashutosh_securities_theme_colors_css() {
         }
 
         .top-bar a:hover {
-            color: <?php echo esc_attr( $primary_color ); ?>;
+            color: <?php echo esc_attr( $topbar_link_hover_color ); ?>;
         }
 
         .top-bar-right .social-links a {
@@ -1361,7 +1420,7 @@ function ashutosh_securities_theme_colors_css() {
         }
 
         .top-bar-right .social-links a:hover {
-            color: <?php echo esc_attr( $primary_color ); ?>;
+            color: <?php echo esc_attr( $topbar_link_hover_color ); ?>;
         }
 
         /* ========================================
@@ -1388,7 +1447,7 @@ function ashutosh_securities_theme_colors_css() {
         .nav-menu > li > a:hover,
         .nav-menu > li.current-menu-item > a,
         .nav-menu > li.current-menu-parent > a {
-            color: <?php echo esc_attr( $primary_color ); ?>;
+            color: <?php echo esc_attr( $nav_link_hover_color ); ?>;
         }
 
         .sub-menu {
@@ -1401,8 +1460,8 @@ function ashutosh_securities_theme_colors_css() {
         }
 
         .sub-menu li a:hover {
-            background: <?php echo esc_attr( $bg_light_gray ); ?>;
-            color: <?php echo esc_attr( $primary_color ); ?>;
+            background: <?php echo esc_attr( $submenu_hover_bg_color ); ?>;
+            color: <?php echo esc_attr( $nav_link_hover_color ); ?>;
         }
 
         /* Mobile Menu */
@@ -1434,7 +1493,7 @@ function ashutosh_securities_theme_colors_css() {
         }
 
         .footer-widget a:hover {
-            color: <?php echo esc_attr( $primary_color ); ?>;
+            color: <?php echo esc_attr( $footer_link_hover_color ); ?>;
         }
 
         .footer-widget svg {
@@ -1446,7 +1505,7 @@ function ashutosh_securities_theme_colors_css() {
         }
 
         .footer-social .social-links a:hover {
-            color: <?php echo esc_attr( $primary_color ); ?>;
+            color: <?php echo esc_attr( $footer_link_hover_color ); ?>;
         }
 
         /* Logo in Footer */
