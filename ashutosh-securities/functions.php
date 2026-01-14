@@ -733,6 +733,132 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'section' => 'ashutosh_securities_cta',
         'type'    => 'url',
     ) );
+
+    // ========================================
+    // THEME COLORS SECTION
+    // ========================================
+    $wp_customize->add_section( 'ashutosh_theme_colors', array(
+        'title'       => __( 'Theme Colors', 'ashutosh-securities' ),
+        'priority'    => 50,
+        'description' => __( 'Customize the global color scheme of your theme. These colors will be applied throughout the entire website.', 'ashutosh-securities' ),
+    ) );
+
+    // Primary Brand Color
+    $wp_customize->add_setting( 'ashutosh_primary_color', array(
+        'default'           => '#F58220',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_primary_color', array(
+        'label'       => __( 'Primary Brand Color', 'ashutosh-securities' ),
+        'description' => __( 'Main brand color used for buttons, links, and accents', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 10,
+    ) ) );
+
+    // Primary Hover Color
+    $wp_customize->add_setting( 'ashutosh_primary_hover_color', array(
+        'default'           => '#e07419',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_primary_hover_color', array(
+        'label'       => __( 'Primary Hover Color', 'ashutosh-securities' ),
+        'description' => __( 'Color when hovering over primary elements', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 20,
+    ) ) );
+
+    // Secondary Brand Color
+    $wp_customize->add_setting( 'ashutosh_secondary_color', array(
+        'default'           => '#3CB878',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_secondary_color', array(
+        'label'       => __( 'Secondary Color', 'ashutosh-securities' ),
+        'description' => __( 'Secondary accent color used throughout the theme', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 30,
+    ) ) );
+
+    // Text Dark Color
+    $wp_customize->add_setting( 'ashutosh_text_dark_color', array(
+        'default'           => '#1a1d29',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_text_dark_color', array(
+        'label'       => __( 'Dark Text Color', 'ashutosh-securities' ),
+        'description' => __( 'Main text color for headings and body content', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 40,
+    ) ) );
+
+    // Text Gray Color
+    $wp_customize->add_setting( 'ashutosh_text_gray_color', array(
+        'default'           => '#6c757d',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_text_gray_color', array(
+        'label'       => __( 'Gray Text Color', 'ashutosh-securities' ),
+        'description' => __( 'Secondary text color for descriptions and subtitles', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 50,
+    ) ) );
+
+    // Background Light Gray
+    $wp_customize->add_setting( 'ashutosh_bg_light_gray', array(
+        'default'           => '#f8f9fa',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_bg_light_gray', array(
+        'label'       => __( 'Light Background Color', 'ashutosh-securities' ),
+        'description' => __( 'Light gray background used for sections', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 60,
+    ) ) );
+
+    // Link Color
+    $wp_customize->add_setting( 'ashutosh_link_color', array(
+        'default'           => '#F58220',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_link_color', array(
+        'label'       => __( 'Link Color', 'ashutosh-securities' ),
+        'description' => __( 'Color for hyperlinks', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 70,
+    ) ) );
+
+    // Link Hover Color
+    $wp_customize->add_setting( 'ashutosh_link_hover_color', array(
+        'default'           => '#e07419',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_link_hover_color', array(
+        'label'       => __( 'Link Hover Color', 'ashutosh-securities' ),
+        'description' => __( 'Color when hovering over links', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 80,
+    ) ) );
+
+    // Button Text Color
+    $wp_customize->add_setting( 'ashutosh_button_text_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ashutosh_button_text_color', array(
+        'label'       => __( 'Button Text Color', 'ashutosh-securities' ),
+        'description' => __( 'Text color for buttons', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_theme_colors',
+        'priority'    => 90,
+    ) ) );
 }
 add_action( 'customize_register', 'ashutosh_securities_customize_register' );
 
@@ -990,6 +1116,199 @@ function ashutosh_securities_add_noopener( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'ashutosh_securities_add_noopener' );
+
+// ========================================
+// THEME COLORS - CUSTOM CSS OUTPUT
+// ========================================
+
+/**
+ * Output Custom Theme Colors CSS
+ * Generates inline CSS based on customizer color settings
+ */
+function ashutosh_securities_theme_colors_css() {
+    // Get color values from theme mods with defaults
+    $primary_color         = get_theme_mod( 'ashutosh_primary_color', '#F58220' );
+    $primary_hover_color   = get_theme_mod( 'ashutosh_primary_hover_color', '#e07419' );
+    $secondary_color       = get_theme_mod( 'ashutosh_secondary_color', '#3CB878' );
+    $text_dark_color       = get_theme_mod( 'ashutosh_text_dark_color', '#1a1d29' );
+    $text_gray_color       = get_theme_mod( 'ashutosh_text_gray_color', '#6c757d' );
+    $bg_light_gray         = get_theme_mod( 'ashutosh_bg_light_gray', '#f8f9fa' );
+    $link_color            = get_theme_mod( 'ashutosh_link_color', '#F58220' );
+    $link_hover_color      = get_theme_mod( 'ashutosh_link_hover_color', '#e07419' );
+    $button_text_color     = get_theme_mod( 'ashutosh_button_text_color', '#ffffff' );
+
+    // Only output CSS if at least one color has been customized
+    $defaults = array(
+        'ashutosh_primary_color'       => '#F58220',
+        'ashutosh_primary_hover_color' => '#e07419',
+        'ashutosh_secondary_color'     => '#3CB878',
+        'ashutosh_text_dark_color'     => '#1a1d29',
+        'ashutosh_text_gray_color'     => '#6c757d',
+        'ashutosh_bg_light_gray'       => '#f8f9fa',
+        'ashutosh_link_color'          => '#F58220',
+        'ashutosh_link_hover_color'    => '#e07419',
+        'ashutosh_button_text_color'   => '#ffffff',
+    );
+
+    $is_customized = false;
+    foreach ( $defaults as $setting => $default_value ) {
+        if ( get_theme_mod( $setting ) && get_theme_mod( $setting ) !== $default_value ) {
+            $is_customized = true;
+            break;
+        }
+    }
+
+    // Output custom CSS
+    ?>
+    <style type="text/css" id="ashutosh-theme-colors-css">
+        :root {
+            --primary-orange: <?php echo esc_attr( $primary_color ); ?>;
+            --primary-orange-hover: <?php echo esc_attr( $primary_hover_color ); ?>;
+            --bg-green: <?php echo esc_attr( $secondary_color ); ?>;
+            --text-dark: <?php echo esc_attr( $text_dark_color ); ?>;
+            --text-gray: <?php echo esc_attr( $text_gray_color ); ?>;
+            --bg-light-gray: <?php echo esc_attr( $bg_light_gray ); ?>;
+        }
+
+        /* Primary Color Applications */
+        .btn-orange-solid,
+        .btn-primary,
+        .btn-orange-solid:hover,
+        .btn-primary:hover,
+        .btn-orange-solid:focus,
+        .btn-primary:focus {
+            background: <?php echo esc_attr( $primary_color ); ?>;
+            border-color: <?php echo esc_attr( $primary_color ); ?>;
+        }
+
+        .btn-orange-solid:hover,
+        .btn-primary:hover,
+        .btn-orange-solid:focus,
+        .btn-primary:focus {
+            background: <?php echo esc_attr( $primary_hover_color ); ?>;
+            border-color: <?php echo esc_attr( $primary_hover_color ); ?>;
+        }
+
+        /* Links */
+        a,
+        .top-bar a:hover,
+        .nav-menu > li > a:hover,
+        .nav-menu > li.current-menu-item > a,
+        .sub-menu li a:hover,
+        .footer-widget a:hover {
+            color: <?php echo esc_attr( $link_color ); ?>;
+        }
+
+        a:hover {
+            color: <?php echo esc_attr( $link_hover_color ); ?>;
+        }
+
+        /* Text Colors */
+        body,
+        .section-content p,
+        .research-section > p,
+        .services-tiger-section > p {
+            color: <?php echo esc_attr( $text_dark_color ); ?>;
+        }
+
+        .text-gray,
+        .research-card p,
+        .service-card-item p {
+            color: <?php echo esc_attr( $text_gray_color ); ?>;
+        }
+
+        /* Background Colors */
+        .bg-light-gray,
+        .promo-banner-section,
+        .services-tiger-section {
+            background: <?php echo esc_attr( $bg_light_gray ); ?>;
+        }
+
+        /* Secondary/Green Color */
+        .bg-green-strip {
+            background: <?php echo esc_attr( $secondary_color ); ?>;
+        }
+
+        /* Logo Circle */
+        .logo-circle {
+            background: linear-gradient(135deg, <?php echo esc_attr( $primary_color ); ?>, <?php echo esc_attr( $primary_hover_color ); ?>);
+        }
+
+        /* Orange Background Section */
+        .bg-orange-section {
+            background: linear-gradient(135deg, <?php echo esc_attr( $primary_color ); ?>, <?php echo esc_attr( $primary_hover_color ); ?>);
+        }
+
+        /* Button Text Color */
+        .btn-orange-solid,
+        .btn-primary {
+            color: <?php echo esc_attr( $button_text_color ); ?>;
+        }
+
+        /* Focus States */
+        .form-control:focus {
+            border-color: <?php echo esc_attr( $primary_color ); ?>;
+            box-shadow: 0 0 0 3px <?php echo esc_attr( $primary_color ); ?>1a;
+        }
+
+        a:focus,
+        button:focus,
+        input:focus {
+            outline-color: <?php echo esc_attr( $primary_color ); ?>;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar-thumb {
+            background: <?php echo esc_attr( $primary_color ); ?>;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: <?php echo esc_attr( $primary_hover_color ); ?>;
+        }
+
+        /* Skip Link */
+        .skip-link {
+            background: <?php echo esc_attr( $primary_color ); ?>;
+        }
+
+        /* Slider */
+        .ashutosh-slider-prev:hover,
+        .ashutosh-slider-next:hover {
+            background: <?php echo esc_attr( $primary_color ); ?>;
+        }
+
+        .ashutosh-slider-dot:hover,
+        .ashutosh-slider-dot.active {
+            background: <?php echo esc_attr( $primary_color ); ?>;
+            border-color: <?php echo esc_attr( $primary_color ); ?>;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 <?php echo esc_attr( $primary_color ); ?>b3;
+            }
+            70% {
+                box-shadow: 0 0 0 15px <?php echo esc_attr( $primary_color ); ?>00;
+            }
+            100% {
+                box-shadow: 0 0 0 0 <?php echo esc_attr( $primary_color ); ?>00;
+            }
+        }
+
+        /* Box Shadows with Primary Color */
+        .btn-orange-solid:hover,
+        .btn-primary:hover {
+            box-shadow: 0 4px 15px <?php echo esc_attr( $primary_color ); ?>4d;
+        }
+
+        .floating-cta .btn {
+            box-shadow: 0 4px 20px <?php echo esc_attr( $primary_color ); ?>66;
+        }
+    </style>
+    <?php
+}
+add_action( 'wp_head', 'ashutosh_securities_theme_colors_css', 100 );
 
 // ========================================
 // HOMEPAGE CONTENT MANAGEMENT SYSTEM

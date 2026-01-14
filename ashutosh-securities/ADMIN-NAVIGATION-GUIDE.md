@@ -95,10 +95,22 @@ This is your main control center for the theme. Here's what you'll find:
 - TMS Login URL
 - Open Account URL
 
-**M. Colors** (WordPress Default)
+**M. Theme Colors** 🆕 **[NEW FEATURE]** ⭐
+- 🎨 Primary Brand Color
+- 🎨 Primary Hover Color
+- 🎨 Secondary Color
+- 🎨 Dark Text Color
+- 🎨 Gray Text Color
+- 🎨 Light Background Color
+- 🎨 Link Color
+- 🎨 Link Hover Color
+- 🎨 Button Text Color
+- **See**: `THEME-COLORS-GUIDE.md` for complete documentation
+
+**N. Colors** (WordPress Default)
 - Primary Color Options
 
-**N. Additional CSS**
+**O. Additional CSS**
 - Custom CSS Code Entry
 
 ---
@@ -215,9 +227,10 @@ Difficulty: ⭐⭐ Medium
 
 ### Task: Change Site Colors
 ```
-Path: Appearance → Customize → Colors
-Time: 3 minutes
+Path: Appearance → Customize → Theme Colors
+Time: 5-10 minutes
 Difficulty: ⭐ Easy
+See: THEME-COLORS-GUIDE.md for complete instructions
 ```
 
 ### Task: Upload Logo
