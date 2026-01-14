@@ -369,15 +369,25 @@ $sections_visibility = get_option( 'ashutosh_sections_visibility', array(
 
 </main>
 
-<?php if ( isset( $sections_visibility['sticky_banner'] ) && $sections_visibility['sticky_banner'] === 'on' ) : ?>
+<?php if ( isset( $sections_visibility['sticky_banner'] ) && $sections_visibility['sticky_banner'] === 'on' && get_theme_mod( 'sticky_banner_enable', true ) ) : 
+    $banner_bg_color = get_theme_mod( 'sticky_banner_bg_color', '#ffffff' );
+    $banner_text_color = get_theme_mod( 'sticky_banner_text_color', '#000000' );
+    $banner_image = get_theme_mod( 'sticky_banner_image', 'https://images.pexels.com/photos/128867/coins-currency-investment-insurance-128867.jpeg?auto=compress&cs=tinysrgb&w=100' );
+?>
 <!-- Sticky Bottom Banner -->
-<div class="sticky-bottom-banner" id="stickyBanner">
+<div class="sticky-bottom-banner" id="stickyBanner" style="background-color: <?php echo esc_attr( $banner_bg_color ); ?>; color: <?php echo esc_attr( $banner_text_color ); ?>;">
     <div class="container">
         <div class="sticky-banner-content">
-            <img src="https://images.pexels.com/photos/128867/coins-currency-investment-insurance-128867.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Banner">
+            <?php if ( $banner_image ) : ?>
+                <img src="<?php echo esc_url( $banner_image ); ?>" alt="<?php echo esc_attr( get_theme_mod( 'sticky_banner_heading', 'Banner' ) ); ?>">
+            <?php endif; ?>
             <div class="sticky-banner-text">
-                <h4><?php echo esc_html( get_theme_mod( 'sticky_banner_heading', 'Balanced Advantage Funds' ) ); ?></h4>
-                <p><?php echo esc_html( get_theme_mod( 'sticky_banner_text', 'Ride market waves with confidence' ) ); ?></p>
+                <h4 style="color: <?php echo esc_attr( $banner_text_color ); ?>;">
+                    <?php echo esc_html( get_theme_mod( 'sticky_banner_heading', 'Balanced Advantage Funds' ) ); ?>
+                </h4>
+                <p style="color: <?php echo esc_attr( $banner_text_color ); ?>; opacity: 0.8;">
+                    <?php echo esc_html( get_theme_mod( 'sticky_banner_text', 'Ride market waves with confidence' ) ); ?>
+                </p>
             </div>
             <a href="<?php echo esc_url( get_theme_mod( 'sticky_banner_button_url', '#' ) ); ?>" class="btn btn-orange-solid">
                 <?php echo esc_html( get_theme_mod( 'sticky_banner_button_text', 'EXPLORE' ) ); ?>

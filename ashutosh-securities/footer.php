@@ -88,11 +88,37 @@
     </div>
 
     <!-- Footer Bottom -->
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="background-color: <?php echo esc_attr( get_theme_mod( 'footer_bottom_bg_color', '#1a1d29' ) ); ?>; color: <?php echo esc_attr( get_theme_mod( 'footer_bottom_text_color', '#aaaaaa' ) ); ?>;">
         <div class="container">
-            <div class="footer-bottom-content">
-                <p>&copy; <?php echo esc_html( date( 'Y' ) ); ?> <?php echo esc_html( get_bloginfo( 'name' ) ); ?>. <?php esc_html_e( 'All rights reserved.', 'ashutosh-securities' ); ?></p>
-                <nav class="footer-links" aria-label="<?php esc_attr_e( 'Footer legal links', 'ashutosh-securities' ); ?>">
+            <div class="footer-bottom-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <?php 
+                    // Additional Footer Text
+                    $additional_text = get_theme_mod( 'footer_additional_text', '' );
+                    if ( $additional_text ) {
+                        echo '<div style="margin-bottom: 10px;">' . wp_kses_post( $additional_text ) . '</div>';
+                    }
+                    
+                    // Copyright Text
+                    if ( get_theme_mod( 'footer_custom_copyright_enable', false ) ) {
+                        $custom_copyright = get_theme_mod( 'footer_copyright_text', '' );
+                        // Replace placeholders
+                        $custom_copyright = str_replace( '{year}', date( 'Y' ), $custom_copyright );
+                        $custom_copyright = str_replace( '{site_name}', get_bloginfo( 'name' ), $custom_copyright );
+                        echo '<p style="margin: 0;">' . wp_kses_post( $custom_copyright ) . '</p>';
+                    } else {
+                        echo '<p style="margin: 0;">&copy; ' . esc_html( date( 'Y' ) ) . ' ' . esc_html( get_bloginfo( 'name' ) ) . '. ' . esc_html__( 'All rights reserved.', 'ashutosh-securities' ) . '</p>';
+                    }
+                    ?>
+                </div>
+                
+                <?php if ( get_theme_mod( 'footer_bottom_show_social', false ) ) : ?>
+                    <div style="flex: 0 0 auto;">
+                        <?php ashutosh_securities_display_social_links( 18, 'footer-bottom-social' ); ?>
+                    </div>
+                <?php endif; ?>
+                
+                <nav class="footer-links" aria-label="<?php esc_attr_e( 'Footer legal links', 'ashutosh-securities' ); ?>" style="flex: 0 0 auto;">
                     <?php
                     wp_nav_menu( array(
                         'theme_location' => 'footer',
@@ -107,6 +133,22 @@
         </div>
     </div>
 </footer>
+
+<style>
+/* Dynamic Footer Bottom Styles */
+.footer-bottom a {
+    color: <?php echo esc_attr( get_theme_mod( 'footer_bottom_link_color', '#ffffff' ) ); ?>;
+}
+.footer-bottom a:hover {
+    color: <?php echo esc_attr( get_theme_mod( 'footer_bottom_link_hover_color', '#F58220' ) ); ?>;
+}
+.footer-bottom-social .social-links a {
+    color: <?php echo esc_attr( get_theme_mod( 'footer_bottom_link_color', '#ffffff' ) ); ?>;
+}
+.footer-bottom-social .social-links a:hover {
+    color: <?php echo esc_attr( get_theme_mod( 'footer_bottom_link_hover_color', '#F58220' ) ); ?>;
+}
+</style>
 
 <?php wp_footer(); ?>
 </body>

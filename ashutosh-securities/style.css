@@ -3,8 +3,8 @@ Theme Name: Ashutosh Brokerage and Securities
 Theme URI: https://www.ashutoshbrokerage.com
 Author: Ashutosh Brokerage Team
 Author URI: https://www.ashutoshbrokerage.com
-Description: A professional financial services WordPress theme inspired by modern investment platforms. Featuring comprehensive sections for trading, mutual funds, and investment services.
-Version: 2.0.1
+Description: A professional financial services WordPress theme inspired by modern investment platforms. Featuring comprehensive sections for trading, mutual funds, and investment services. Now with fully dynamic sticky banner and footer bottom controls.
+Version: 2.1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ashutosh-securities
@@ -850,9 +850,45 @@ ul {
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 25px;
-  text-align: center;
   color: #aaa;
   font-size: 14px;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-menu {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-menu li {
+  display: inline-block;
+}
+
+.footer-menu a {
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-menu {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 /* Utility Classes */

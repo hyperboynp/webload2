@@ -312,12 +312,34 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'type'    => 'textarea',
     ) );
     
-    // Sticky Banner
+    // Sticky Banner - Enhanced with all options
     $wp_customize->add_section( 'ashutosh_sticky_banner', array(
         'title'    => __( 'Sticky Bottom Banner', 'ashutosh-securities' ),
         'priority' => 30,
     ) );
     
+    // Enable/Disable Sticky Banner
+    $wp_customize->add_setting( 'sticky_banner_enable', array(
+        'default'           => true,
+        'sanitize_callback' => 'ashutosh_securities_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'sticky_banner_enable', array(
+        'label'   => __( 'Enable Sticky Banner', 'ashutosh-securities' ),
+        'section' => 'ashutosh_sticky_banner',
+        'type'    => 'checkbox',
+    ) );
+    
+    // Banner Image
+    $wp_customize->add_setting( 'sticky_banner_image', array(
+        'default'           => 'https://images.pexels.com/photos/128867/coins-currency-investment-insurance-128867.jpeg?auto=compress&cs=tinysrgb&w=100',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'sticky_banner_image', array(
+        'label'   => __( 'Banner Image', 'ashutosh-securities' ),
+        'section' => 'ashutosh_sticky_banner',
+    ) ) );
+    
+    // Banner Heading
     $wp_customize->add_setting( 'sticky_banner_heading', array(
         'default'           => 'Balanced Advantage Funds',
         'sanitize_callback' => 'sanitize_text_field',
@@ -328,6 +350,7 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'type'    => 'text',
     ) );
     
+    // Banner Text
     $wp_customize->add_setting( 'sticky_banner_text', array(
         'default'           => 'Ride market waves with confidence',
         'sanitize_callback' => 'sanitize_text_field',
@@ -338,6 +361,7 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'type'    => 'text',
     ) );
     
+    // Button Text
     $wp_customize->add_setting( 'sticky_banner_button_text', array(
         'default'           => 'EXPLORE',
         'sanitize_callback' => 'sanitize_text_field',
@@ -348,6 +372,7 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'type'    => 'text',
     ) );
     
+    // Button URL
     $wp_customize->add_setting( 'sticky_banner_button_url', array(
         'default'           => '#',
         'sanitize_callback' => 'esc_url_raw',
@@ -357,6 +382,26 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'section' => 'ashutosh_sticky_banner',
         'type'    => 'url',
     ) );
+    
+    // Background Color
+    $wp_customize->add_setting( 'sticky_banner_bg_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'sticky_banner_bg_color', array(
+        'label'   => __( 'Background Color', 'ashutosh-securities' ),
+        'section' => 'ashutosh_sticky_banner',
+    ) ) );
+    
+    // Text Color
+    $wp_customize->add_setting( 'sticky_banner_text_color', array(
+        'default'           => '#000000',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'sticky_banner_text_color', array(
+        'label'   => __( 'Text Color', 'ashutosh-securities' ),
+        'section' => 'ashutosh_sticky_banner',
+    ) ) );
     
     // Floating CTA
     $wp_customize->add_setting( 'floating_cta_text', array(
@@ -377,6 +422,101 @@ function ashutosh_securities_customize_register( $wp_customize ) {
         'label'   => __( 'Floating CTA Button URL', 'ashutosh-securities' ),
         'section' => 'ashutosh_sticky_banner',
         'type'    => 'url',
+    ) );
+    
+    // ========================================
+    // FOOTER BOTTOM SECTION
+    // ========================================
+    $wp_customize->add_section( 'ashutosh_footer_bottom', array(
+        'title'    => __( 'Footer Bottom Settings', 'ashutosh-securities' ),
+        'priority' => 31,
+    ) );
+    
+    // Enable/Disable Custom Copyright
+    $wp_customize->add_setting( 'footer_custom_copyright_enable', array(
+        'default'           => false,
+        'sanitize_callback' => 'ashutosh_securities_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'footer_custom_copyright_enable', array(
+        'label'       => __( 'Use Custom Copyright Text', 'ashutosh-securities' ),
+        'description' => __( 'Enable to use custom copyright text instead of auto-generated', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_footer_bottom',
+        'type'        => 'checkbox',
+    ) );
+    
+    // Custom Copyright Text
+    $wp_customize->add_setting( 'footer_copyright_text', array(
+        'default'           => '',
+        'sanitize_callback' => 'wp_kses_post',
+    ) );
+    $wp_customize->add_control( 'footer_copyright_text', array(
+        'label'       => __( 'Custom Copyright Text', 'ashutosh-securities' ),
+        'description' => __( 'HTML allowed. Use {year} for current year, {site_name} for site name', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_footer_bottom',
+        'type'        => 'textarea',
+    ) );
+    
+    // Footer Background Color
+    $wp_customize->add_setting( 'footer_bottom_bg_color', array(
+        'default'           => '#1a1d29',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_bottom_bg_color', array(
+        'label'   => __( 'Footer Bottom Background Color', 'ashutosh-securities' ),
+        'section' => 'ashutosh_footer_bottom',
+    ) ) );
+    
+    // Footer Text Color
+    $wp_customize->add_setting( 'footer_bottom_text_color', array(
+        'default'           => '#aaaaaa',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_bottom_text_color', array(
+        'label'   => __( 'Footer Bottom Text Color', 'ashutosh-securities' ),
+        'section' => 'ashutosh_footer_bottom',
+    ) ) );
+    
+    // Footer Link Color
+    $wp_customize->add_setting( 'footer_bottom_link_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_bottom_link_color', array(
+        'label'   => __( 'Footer Bottom Link Color', 'ashutosh-securities' ),
+        'section' => 'ashutosh_footer_bottom',
+    ) ) );
+    
+    // Footer Link Hover Color
+    $wp_customize->add_setting( 'footer_bottom_link_hover_color', array(
+        'default'           => '#F58220',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_bottom_link_hover_color', array(
+        'label'   => __( 'Footer Bottom Link Hover Color', 'ashutosh-securities' ),
+        'section' => 'ashutosh_footer_bottom',
+    ) ) );
+    
+    // Show Social Links in Footer Bottom
+    $wp_customize->add_setting( 'footer_bottom_show_social', array(
+        'default'           => false,
+        'sanitize_callback' => 'ashutosh_securities_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'footer_bottom_show_social', array(
+        'label'   => __( 'Show Social Links in Footer Bottom', 'ashutosh-securities' ),
+        'section' => 'ashutosh_footer_bottom',
+        'type'    => 'checkbox',
+    ) );
+    
+    // Additional Footer Text (before copyright)
+    $wp_customize->add_setting( 'footer_additional_text', array(
+        'default'           => '',
+        'sanitize_callback' => 'wp_kses_post',
+    ) );
+    $wp_customize->add_control( 'footer_additional_text', array(
+        'label'       => __( 'Additional Footer Text', 'ashutosh-securities' ),
+        'description' => __( 'Text to display before copyright (HTML allowed)', 'ashutosh-securities' ),
+        'section'     => 'ashutosh_footer_bottom',
+        'type'        => 'textarea',
     ) );
     
     // Contact Information Section
@@ -595,6 +735,13 @@ function ashutosh_securities_customize_register( $wp_customize ) {
     ) );
 }
 add_action( 'customize_register', 'ashutosh_securities_customize_register' );
+
+/**
+ * Sanitize checkbox values
+ */
+function ashutosh_securities_sanitize_checkbox( $checked ) {
+    return ( ( isset( $checked ) && true === $checked ) ? true : false );
+}
 
 /**
  * Centralized Social Media Configuration

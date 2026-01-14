@@ -8,12 +8,20 @@ A professional WordPress theme for Ashutosh Brokerage and Securities Pvt Ltd, fe
 - Custom front page template
 - Widget-ready footer (4 columns)
 - Custom navigation menus
+- **NEW: Fully Dynamic Sticky Bottom Banner** with backend controls
+- **NEW: Fully Dynamic Footer Bottom Section** with backend controls
 - Theme customizer options for:
   - Contact information (email, phone, address)
-  - Social media links (Facebook, LinkedIn, Twitter, Instagram)
+  - Social media links (Facebook, LinkedIn, Twitter, Instagram, YouTube, WhatsApp, and more)
+  - Sticky banner (heading, text, button, image, colors)
+  - Footer bottom (copyright, colors, social links, additional text)
 - Clean and modern design
 - SEO-friendly structure
 - Cross-browser compatible
+- Advanced animations and scroll effects
+- Custom slider system
+- Accessibility features (ARIA labels, skip links)
+- Schema.org structured data
 
 ## Installation
 
@@ -72,7 +80,29 @@ A professional WordPress theme for Ashutosh Brokerage and Securities Pvt Ltd, fe
    - Footer - Column 4 (reserved for contact info)
 3. Drag and drop widgets into these areas
 
-### 6. Recommended Widgets
+### 6. **NEW: Configure Sticky Bottom Banner**
+1. Go to Appearance > Customize > Sticky Bottom Banner
+2. Enable/disable the banner
+3. Upload banner image (recommended: 100x100px)
+4. Set heading and description text
+5. Configure button text and URL
+6. Customize background and text colors
+7. Click "Publish"
+
+**See detailed guide**: `BACKEND-CUSTOMIZATION-GUIDE.md`
+
+### 7. **NEW: Configure Footer Bottom Section**
+1. Go to Appearance > Customize > Footer Bottom Settings
+2. Enable custom copyright text (optional)
+3. Use placeholders: `{year}` for current year, `{site_name}` for site name
+4. Set background, text, and link colors
+5. Enable social links in footer (optional)
+6. Add additional footer text or disclaimers
+7. Click "Publish"
+
+**See detailed guide**: `BACKEND-CUSTOMIZATION-GUIDE.md`
+
+### 8. Recommended Widgets
 - **Footer Column 2**: Custom Menu widget (Quick Links)
 - **Footer Column 3**: Custom Menu widget (Services)
 
@@ -140,6 +170,24 @@ GPL v2 or later
 
 ## Changelog
 
+### Version 2.1.0 (Latest)
+- **NEW**: Fully dynamic Sticky Bottom Banner with comprehensive backend controls
+- **NEW**: Fully dynamic Footer Bottom Section with backend controls
+- Added enable/disable toggle for sticky banner
+- Added image upload for sticky banner
+- Added color customizers for sticky banner (background, text)
+- Added custom copyright text with placeholders ({year}, {site_name})
+- Added footer bottom color controls (background, text, links, hover)
+- Added option to show social links in footer bottom
+- Added additional footer text option for disclaimers
+- Enhanced backend documentation with detailed guides
+- Improved mobile responsiveness for footer sections
+
+### Version 2.0.1
+- Security enhancements and bug fixes
+- Performance optimizations
+- Enhanced SEO features
+
 ### Version 1.0.0
 - Initial release
 - Front page template
@@ -147,6 +195,23 @@ GPL v2 or later
 - Footer widget areas
 - Theme customizer options
 - Responsive design
+
+## Documentation Files
+
+This theme includes comprehensive documentation:
+
+### 📖 Main Documentation
+- **README.md** (this file) - General setup and features overview
+
+### 🎨 Backend Customization Guides
+- **BACKEND-CUSTOMIZATION-GUIDE.md** - Complete guide for sticky banner and footer customization
+- **QUICK-REFERENCE.md** - Quick reference card for common tasks
+
+### 📋 Content Management
+- **BACKEND-CONTENT-MANAGEMENT-GUIDE.md** - Guide for managing homepage content
+
+To access these guides, navigate to your theme folder:
+`wp-content/themes/ashutosh-securities/`
 
 ## Notes
 
