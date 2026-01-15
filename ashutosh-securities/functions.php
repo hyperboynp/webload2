@@ -1776,8 +1776,405 @@ function ashutosh_securities_register_homepage_cpts() {
         'has_archive'         => false,
         'rewrite'             => false,
     ));
+    
+    // Team Members Post Type
+    register_post_type( 'team_member', array(
+        'labels' => array(
+            'name'               => __( 'Team Members', 'ashutosh-securities' ),
+            'singular_name'      => __( 'Team Member', 'ashutosh-securities' ),
+            'add_new'            => __( 'Add New Member', 'ashutosh-securities' ),
+            'add_new_item'       => __( 'Add New Team Member', 'ashutosh-securities' ),
+            'edit_item'          => __( 'Edit Team Member', 'ashutosh-securities' ),
+            'new_item'           => __( 'New Team Member', 'ashutosh-securities' ),
+            'view_item'          => __( 'View Team Member', 'ashutosh-securities' ),
+            'search_items'       => __( 'Search Team Members', 'ashutosh-securities' ),
+            'not_found'          => __( 'No team members found', 'ashutosh-securities' ),
+            'not_found_in_trash' => __( 'No team members found in Trash', 'ashutosh-securities' ),
+        ),
+        'public'              => true,
+        'show_ui'             => true,
+        'menu_icon'           => 'dashicons-groups',
+        'menu_position'       => 26,
+        'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
+        'has_archive'         => false,
+        'rewrite'             => array( 'slug' => 'team' ),
+    ));
+    
+    // Downloads Post Type
+    register_post_type( 'download_item', array(
+        'labels' => array(
+            'name'               => __( 'Downloads', 'ashutosh-securities' ),
+            'singular_name'      => __( 'Download', 'ashutosh-securities' ),
+            'add_new'            => __( 'Add New Download', 'ashutosh-securities' ),
+            'add_new_item'       => __( 'Add New Download', 'ashutosh-securities' ),
+            'edit_item'          => __( 'Edit Download', 'ashutosh-securities' ),
+            'new_item'           => __( 'New Download', 'ashutosh-securities' ),
+            'view_item'          => __( 'View Download', 'ashutosh-securities' ),
+            'search_items'       => __( 'Search Downloads', 'ashutosh-securities' ),
+            'not_found'          => __( 'No downloads found', 'ashutosh-securities' ),
+            'not_found_in_trash' => __( 'No downloads found in Trash', 'ashutosh-securities' ),
+        ),
+        'public'              => true,
+        'show_ui'             => true,
+        'menu_icon'           => 'dashicons-download',
+        'menu_position'       => 27,
+        'supports'            => array( 'title', 'editor', 'thumbnail' ),
+        'has_archive'         => false,
+        'rewrite'             => array( 'slug' => 'downloads' ),
+        'taxonomies'          => array( 'download_category' ),
+    ));
+    
+    // Register Download Category Taxonomy
+    register_taxonomy( 'download_category', 'download_item', array(
+        'labels' => array(
+            'name'              => __( 'Download Categories', 'ashutosh-securities' ),
+            'singular_name'     => __( 'Download Category', 'ashutosh-securities' ),
+            'search_items'      => __( 'Search Categories', 'ashutosh-securities' ),
+            'all_items'         => __( 'All Categories', 'ashutosh-securities' ),
+            'parent_item'       => __( 'Parent Category', 'ashutosh-securities' ),
+            'parent_item_colon' => __( 'Parent Category:', 'ashutosh-securities' ),
+            'edit_item'         => __( 'Edit Category', 'ashutosh-securities' ),
+            'update_item'       => __( 'Update Category', 'ashutosh-securities' ),
+            'add_new_item'      => __( 'Add New Category', 'ashutosh-securities' ),
+            'new_item_name'     => __( 'New Category Name', 'ashutosh-securities' ),
+            'menu_name'         => __( 'Categories', 'ashutosh-securities' ),
+        ),
+        'hierarchical'      => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'download-category' ),
+    ));
 }
 add_action( 'init', 'ashutosh_securities_register_homepage_cpts', 0 );
+
+// ========================================
+// TEAM MEMBER META BOXES
+// ========================================
+
+// Add Team Member Meta Boxes
+function ashutosh_securities_add_team_member_meta_boxes() {
+    add_meta_box(
+        'team_member_details',
+        __( 'Team Member Details', 'ashutosh-securities' ),
+        'ashutosh_securities_team_member_details_callback',
+        'team_member',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'ashutosh_securities_add_team_member_meta_boxes' );
+
+// Team Member Meta Box Callback
+function ashutosh_securities_team_member_details_callback( $post ) {
+    wp_nonce_field( 'ashutosh_team_member_nonce', 'team_member_nonce' );
+    
+    $position = get_post_meta( $post->ID, '_team_position', true );
+    $email = get_post_meta( $post->ID, '_team_email', true );
+    $phone = get_post_meta( $post->ID, '_team_phone', true );
+    $facebook = get_post_meta( $post->ID, '_team_facebook', true );
+    $linkedin = get_post_meta( $post->ID, '_team_linkedin', true );
+    $twitter = get_post_meta( $post->ID, '_team_twitter', true );
+    ?>
+    <div style="padding: 15px;">
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'Position/Title:', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="text" name="team_position" value="<?php echo esc_attr( $position ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="e.g., Chief Executive Officer">
+        </p>
+        
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'Email:', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="email" name="team_email" value="<?php echo esc_attr( $email ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="email@example.com">
+        </p>
+        
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'Phone:', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="text" name="team_phone" value="<?php echo esc_attr( $phone ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="+977-01-1234567">
+        </p>
+        
+        <hr style="margin: 20px 0;">
+        
+        <h4 style="margin-bottom: 15px;"><?php _e( 'Social Media Links (Optional)', 'ashutosh-securities' ); ?></h4>
+        
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'Facebook URL:', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="url" name="team_facebook" value="<?php echo esc_url( $facebook ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="https://facebook.com/username">
+        </p>
+        
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'LinkedIn URL:', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="url" name="team_linkedin" value="<?php echo esc_url( $linkedin ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="https://linkedin.com/in/username">
+        </p>
+        
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'Twitter URL:', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="url" name="team_twitter" value="<?php echo esc_url( $twitter ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="https://twitter.com/username">
+        </p>
+        
+        <div style="background: #f0f0f0; padding: 15px; border-radius: 5px; margin-top: 20px;">
+            <p style="margin: 0;"><strong><?php _e( 'Note:', 'ashutosh-securities' ); ?></strong> 
+            <?php _e( 'Use the Editor above for the team member bio/description. Set the Featured Image for the team member photo.', 'ashutosh-securities' ); ?></p>
+        </div>
+    </div>
+    <?php
+}
+
+// Save Team Member Meta Data
+function ashutosh_securities_save_team_member_meta( $post_id ) {
+    // Check nonce
+    if ( ! isset( $_POST['team_member_nonce'] ) || ! wp_verify_nonce( $_POST['team_member_nonce'], 'ashutosh_team_member_nonce' ) ) {
+        return;
+    }
+    
+    // Check autosave
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    
+    // Check permissions
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+    
+    // Save fields
+    if ( isset( $_POST['team_position'] ) ) {
+        update_post_meta( $post_id, '_team_position', sanitize_text_field( $_POST['team_position'] ) );
+    }
+    
+    if ( isset( $_POST['team_email'] ) ) {
+        update_post_meta( $post_id, '_team_email', sanitize_email( $_POST['team_email'] ) );
+    }
+    
+    if ( isset( $_POST['team_phone'] ) ) {
+        update_post_meta( $post_id, '_team_phone', sanitize_text_field( $_POST['team_phone'] ) );
+    }
+    
+    if ( isset( $_POST['team_facebook'] ) ) {
+        update_post_meta( $post_id, '_team_facebook', esc_url_raw( $_POST['team_facebook'] ) );
+    }
+    
+    if ( isset( $_POST['team_linkedin'] ) ) {
+        update_post_meta( $post_id, '_team_linkedin', esc_url_raw( $_POST['team_linkedin'] ) );
+    }
+    
+    if ( isset( $_POST['team_twitter'] ) ) {
+        update_post_meta( $post_id, '_team_twitter', esc_url_raw( $_POST['team_twitter'] ) );
+    }
+}
+add_action( 'save_post_team_member', 'ashutosh_securities_save_team_member_meta' );
+
+// ========================================
+// DOWNLOAD ITEM META BOXES
+// ========================================
+
+// Add Download Item Meta Boxes
+function ashutosh_securities_add_download_meta_boxes() {
+    add_meta_box(
+        'download_file_details',
+        __( 'File Upload & Details', 'ashutosh-securities' ),
+        'ashutosh_securities_download_file_details_callback',
+        'download_item',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'ashutosh_securities_add_download_meta_boxes' );
+
+// Download File Meta Box Callback
+function ashutosh_securities_download_file_details_callback( $post ) {
+    wp_nonce_field( 'ashutosh_download_nonce', 'download_nonce' );
+    
+    $file_url = get_post_meta( $post->ID, '_download_file_url', true );
+    $file_size = get_post_meta( $post->ID, '_download_file_size', true );
+    $file_type = get_post_meta( $post->ID, '_download_file_type', true );
+    $download_count = get_post_meta( $post->ID, '_download_count', true );
+    ?>
+    <div style="padding: 15px;">
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'Upload File:', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="text" id="download_file_url" name="download_file_url" 
+                   value="<?php echo esc_url( $file_url ); ?>" 
+                   style="width: 70%; padding: 8px;" readonly>
+            <button type="button" class="button" id="upload_file_button" style="padding: 8px 15px;">
+                <?php _e( 'Upload File', 'ashutosh-securities' ); ?>
+            </button>
+            <button type="button" class="button" id="remove_file_button" style="padding: 8px 15px;">
+                <?php _e( 'Remove', 'ashutosh-securities' ); ?>
+            </button>
+        </p>
+        
+        <p style="color: #666; font-size: 13px;">
+            <?php _e( 'Supported formats: PDF, JPG, PNG, DOC, DOCX, XLS, XLSX, ZIP', 'ashutosh-securities' ); ?>
+        </p>
+        
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'File Size (Optional - will be auto-detected):', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="text" name="download_file_size" value="<?php echo esc_attr( $file_size ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="e.g., 2.5 MB">
+        </p>
+        
+        <p>
+            <label style="display: block; font-weight: bold; margin-bottom: 5px;">
+                <?php _e( 'File Type (Optional - will be auto-detected):', 'ashutosh-securities' ); ?>
+            </label>
+            <input type="text" name="download_file_type" value="<?php echo esc_attr( $file_type ); ?>" 
+                   style="width: 100%; padding: 8px;" placeholder="e.g., PDF Document">
+        </p>
+        
+        <?php if ( $download_count ) : ?>
+        <div style="background: #e7f7e7; padding: 15px; border-radius: 5px; margin-top: 20px;">
+            <p style="margin: 0;"><strong><?php _e( 'Download Statistics:', 'ashutosh-securities' ); ?></strong> 
+            <?php printf( __( 'This file has been downloaded %d times.', 'ashutosh-securities' ), intval( $download_count ) ); ?></p>
+        </div>
+        <?php endif; ?>
+        
+        <div style="background: #f0f0f0; padding: 15px; border-radius: 5px; margin-top: 20px;">
+            <p style="margin: 0;"><strong><?php _e( 'Note:', 'ashutosh-securities' ); ?></strong> 
+            <?php _e( 'Use the Editor above for the file description. Set the Featured Image as a preview/icon for the download.', 'ashutosh-securities' ); ?></p>
+        </div>
+    </div>
+    
+    <script>
+    jQuery(document).ready(function($) {
+        var fileFrame;
+        
+        $('#upload_file_button').on('click', function(e) {
+            e.preventDefault();
+            
+            if (fileFrame) {
+                fileFrame.open();
+                return;
+            }
+            
+            fileFrame = wp.media({
+                title: '<?php _e( 'Select or Upload File', 'ashutosh-securities' ); ?>',
+                button: {
+                    text: '<?php _e( 'Use this file', 'ashutosh-securities' ); ?>'
+                },
+                multiple: false
+            });
+            
+            fileFrame.on('select', function() {
+                var attachment = fileFrame.state().get('selection').first().toJSON();
+                $('#download_file_url').val(attachment.url);
+            });
+            
+            fileFrame.open();
+        });
+        
+        $('#remove_file_button').on('click', function(e) {
+            e.preventDefault();
+            $('#download_file_url').val('');
+        });
+    });
+    </script>
+    <?php
+}
+
+// Save Download File Meta Data
+function ashutosh_securities_save_download_meta( $post_id ) {
+    // Check nonce
+    if ( ! isset( $_POST['download_nonce'] ) || ! wp_verify_nonce( $_POST['download_nonce'], 'ashutosh_download_nonce' ) ) {
+        return;
+    }
+    
+    // Check autosave
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    
+    // Check permissions
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+    
+    // Save file URL
+    if ( isset( $_POST['download_file_url'] ) ) {
+        $file_url = esc_url_raw( $_POST['download_file_url'] );
+        update_post_meta( $post_id, '_download_file_url', $file_url );
+        
+        // Auto-detect file size and type if URL is provided
+        if ( $file_url ) {
+            $file_path = str_replace( wp_get_upload_dir()['baseurl'], wp_get_upload_dir()['basedir'], $file_url );
+            
+            if ( file_exists( $file_path ) ) {
+                // Get file size
+                $file_size_bytes = filesize( $file_path );
+                $file_size = size_format( $file_size_bytes, 2 );
+                update_post_meta( $post_id, '_download_file_size', $file_size );
+                
+                // Get file type
+                $file_extension = strtoupper( pathinfo( $file_path, PATHINFO_EXTENSION ) );
+                $file_type_map = array(
+                    'PDF' => 'PDF Document',
+                    'DOC' => 'Word Document',
+                    'DOCX' => 'Word Document',
+                    'XLS' => 'Excel Spreadsheet',
+                    'XLSX' => 'Excel Spreadsheet',
+                    'JPG' => 'Image',
+                    'JPEG' => 'Image',
+                    'PNG' => 'Image',
+                    'ZIP' => 'Compressed Archive',
+                );
+                $file_type = isset( $file_type_map[$file_extension] ) ? $file_type_map[$file_extension] : $file_extension . ' File';
+                update_post_meta( $post_id, '_download_file_type', $file_type );
+            }
+        }
+    }
+    
+    // Save manual file size if provided
+    if ( isset( $_POST['download_file_size'] ) && ! empty( $_POST['download_file_size'] ) ) {
+        update_post_meta( $post_id, '_download_file_size', sanitize_text_field( $_POST['download_file_size'] ) );
+    }
+    
+    // Save manual file type if provided
+    if ( isset( $_POST['download_file_type'] ) && ! empty( $_POST['download_file_type'] ) ) {
+        update_post_meta( $post_id, '_download_file_type', sanitize_text_field( $_POST['download_file_type'] ) );
+    }
+}
+add_action( 'save_post_download_item', 'ashutosh_securities_save_download_meta' );
+
+// Track download count
+function ashutosh_securities_track_download() {
+    if ( isset( $_GET['download_id'] ) && is_numeric( $_GET['download_id'] ) ) {
+        $post_id = intval( $_GET['download_id'] );
+        $file_url = get_post_meta( $post_id, '_download_file_url', true );
+        
+        if ( $file_url ) {
+            // Increment download count
+            $count = get_post_meta( $post_id, '_download_count', true );
+            $count = $count ? intval( $count ) + 1 : 1;
+            update_post_meta( $post_id, '_download_count', $count );
+            
+            // Redirect to file
+            wp_redirect( $file_url );
+            exit;
+        }
+    }
+}
+add_action( 'template_redirect', 'ashutosh_securities_track_download' );
 
 // Add Custom Admin Menu for Homepage Content Management
 function ashutosh_securities_add_admin_menu() {
